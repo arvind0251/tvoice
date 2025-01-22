@@ -1,6 +1,7 @@
 import os
 from telegram import Update
-from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackContext
+from telegram.ext import Updater, CommandHandler, MessageHandler, CallbackContext
+from telegram.ext import filters  # Updated import for filters
 
 TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')  # Heroku environment variable se token lein
 
@@ -23,7 +24,7 @@ def main() -> None:
 
     # Command handlers
     updater.dispatcher.add_handler(CommandHandler("start", start))
-    updater.dispatcher.add_handler(MessageHandler(Filters.voice, handle_voice))
+    updater.dispatcher.add_handler(MessageHandler(filters.VOICE, handle_voice))  # Updated to use filters
 
     # Start the bot
     updater.start_polling()
